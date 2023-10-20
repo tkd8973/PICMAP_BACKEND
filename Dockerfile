@@ -1,3 +1,6 @@
 FROM adoptopenjdk:11-jdk-hotspot
 
-Ex
+EXPOSE 8082
+
+ADD build/libs/final_backend.jar final_backend.jar
+ENTRYPOINT ["java","-jar","final_backend.jar"]
