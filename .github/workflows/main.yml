@@ -27,9 +27,13 @@ jobs:
       with:
         java-version: '11'
         distribution: 'temurin'
-    - name: Build with Gradle
-      run: ./gradlew clean build -PDATABASE_HOST=${{ secrets.DATABASE_HOST }} -PDATABASE_NAME=${{ secrets.DATABASE_NAME }} -PDATABASE_USERNAME=${{ secrets.DATABASE_USERNAME }} -PDATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}
 
+    - name: Grant execute permission for gradlew
+      run: chmod +x ./gradlew
+
+
+    - name: Run Gradle Build
+      run: ./gradlew clean build -PDATABASE_HOST=${{ secrets.DATABASE_HOST }} -PDATABASE_NAME=${{ secrets.DATABASE_NAME }} -PDATABASE_USERNAME=${{ secrets.DATABASE_USERNAME }} -PDATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}
 
     - name: Configure Docker daemon
       run: |
