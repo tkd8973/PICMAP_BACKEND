@@ -1,0 +1,27 @@
+name: Docker Image Push Test
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed
+      
+jobs:
+  build-and-push:
+    # PR이 머지된 경우에만 실행
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Login to Docker Registry
+      run: docker login ${{ secrets.DOCKER_REGISTRY_URL }} -u ${{ secrets.DOCKER_REGISTRY_USERNAME }} -p ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
+
+    - name: Build and Push Docker Image
+      run: |
+        docker build -t ${{ secrets.DOCKER_REGISTRY_URL }}/Project:latest .
+        docker push ${{ secrets.DOCKER_REGISTRY_URL }}/Project:latest
+      
