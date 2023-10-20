@@ -26,6 +26,10 @@ jobs:
     - name: Login to Docker Registry
       run: docker login ${{ secrets.DOCKER_REGISTRY_URL }} -u ${{ secrets.DOCKER_REGISTRY_USERNAME }} -p ${{ secrets.DOCKER_REGISTRY_PASSWORD }}
 
+    - name: Working Directory
+      run:
+        ls -al
+        pwd
     - name: Build and Push Docker Image
       run: |
         docker build -t ${{ secrets.DOCKER_REGISTRY_URL }}/picturemapping:latest .
