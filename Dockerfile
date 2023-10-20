@@ -2,5 +2,5 @@ FROM adoptopenjdk:11-jdk-hotspot
 
 EXPOSE 8082
 
-ADD build/libs/final_backend.jar final_backend.jar
-ENTRYPOINT ["java","-jar","Project.jar"]
+ADD build/libs/PictureMapping.jar PictureMapping.jar
+ENTRYPOINT ["java","-jar","PictureMapping.jar"]
