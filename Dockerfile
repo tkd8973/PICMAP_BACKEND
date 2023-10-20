@@ -2,5 +2,5 @@ FROM adoptopenjdk:11-jdk-hotspot
 
 EXPOSE 8082
 
-ADD build/libs/PictureMapping.jar PictureMapping.jar
-ENTRYPOINT ["java","-jar","PictureMapping.jar"]
+ADD build/libs/picturemapping.jar picturemapping.jar
+ENTRYPOINT ["java","-jar","picturemapping.jar"]
