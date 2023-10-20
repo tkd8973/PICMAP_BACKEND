@@ -28,6 +28,6 @@ jobs:
 
     - name: Build and Push Docker Image
       run: |
-        docker build -t ${{ secrets.DOCKER_REGISTRY_URL }}/Project:latest .
-        docker push ${{ secrets.DOCKER_REGISTRY_URL }}/Project:latest
+        docker build -t ${{ secrets.DOCKER_REGISTRY_URL }}/PictureMapping:latest .
+        docker push ${{ secrets.DOCKER_REGISTRY_URL }}/PictureMapping:latest
       
