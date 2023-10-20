@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'picturemapping'
-//version = '0.0.1-SNAPSHOT'
+version = '0.0.1-SNAPSHOT'
 
 java {
 	sourceCompatibility = '1.8'
@@ -31,6 +31,17 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 	implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.4.1'
+}
+
+processResources {
+	filesMatching('**/application.properties') {
+		expand([
+				DATABASE_HOST     : project.findProperty('DATABASE_HOST') ?: System.getenv('DATABASE_HOST'),
+				DATABASE_NAME     : project.findProperty('DATABASE_NAME') ?: System.getenv('DATABASE_NAME'),
+				DATABASE_USERNAME : project.findProperty('DATABASE_USERNAME') ?: System.getenv('DATABASE_USERNAME'),
+				DATABASE_PASSWORD : project.findProperty('DATABASE_PASSWORD') ?: System.getenv('DATABASE_PASSWORD'),
+		])
+	}
 }
 
 tasks.named('test') {
