@@ -12,4 +12,5 @@ public class testDTO {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long tid;
 
+    private String TEst;
 }
