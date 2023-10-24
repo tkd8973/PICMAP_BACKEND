@@ -1,18 +1,22 @@
-package Project.PictureMapping.PicMap.model;
+package Project.PictureMapping.Volunteer.model;
 
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Component
 @Data
-public class FileVO {
+public class FileImageVO {
     //    파일 번호
-    private Long fileNumber;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long fileId;
     //    파일 이름
-    private String fileId;
+    private String fileName;
     //    파일 업로드 경로
     private String fileUploadPath;
     //    파일 고유 번호
@@ -29,11 +33,4 @@ public class FileVO {
     private String lat;
     //여행 일정 내 위치(경도)
     private String lon;
-
-    public void create(String fileName, String fileUploadPath, String fileUuid, boolean fileImageCheck) {
-        this.fileId = fileId;
-        this.fileUploadPath = fileUploadPath;
-        this.fileUuid = fileUuid;
-        this.fileImageCheck = fileImageCheck;
-    }
 }

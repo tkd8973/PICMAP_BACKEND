@@ -4,21 +4,24 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Component // 스프링 빈으로 등록
 @Data // 롬복을 사용하여 getter, setter, equals, hashCode, toString 생성
-@NoArgsConstructor // 파라미터가 없는 생성자 생성
+@Entity
+@Table(name = "travel")
 public class TravelVO {
     //식별아이디 number
-    private Long scheduleNumber;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long scheduleId;
     //유저닉네임 varchar2 50
     private String nickname;
     //여행목록 varchar2 500 List
-    private List<String> scheduleList;
+//    private List<String> scheduleList;
     //여행일정 varchar2 500 List
-    private List<String> schedule;
+//    private List<String> scheduleContent;
     //생성날짜 datetime
     private LocalDateTime createTime;
     //수정한 날짜 datetime
