@@ -53,6 +53,6 @@ jobs:
     - name: Build and Push Docker Image
       run: |
         docker build -t ${{ secrets.DOCKER_REGISTRY_URL }}/picturemapping .
-        docker push ${{ secrets.DOCKER_REGISTRY_URL }}/picturemapping
+        docker push ${{ secrets.DOCKER_REGISTRY_URL }}/picturemapping/backend
 
       
