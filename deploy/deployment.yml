@@ -16,7 +16,7 @@ spec:
         kubernetes.io/hostname: backend  # 원하는 노드 이름 지정
       containers:
         - name: backend
-          image: ${{ secrets.DOCKER_REGISTRY_URL }}/backend:${{ github.sha }}
+          image: 192.168.1.102:5000/backend@sha256:3487e6ee1f9c5bd730b07c541fc7a04b5dee6bc22dece576eccca6ccedceb2cd
           ports:
             - containerPort: 8080
 ---
