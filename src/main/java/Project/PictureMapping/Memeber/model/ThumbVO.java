@@ -3,10 +3,15 @@ package Project.PictureMapping.Memeber.model;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
-@Component
+import javax.persistence.*;
+
 @Data
+@Entity
+@Table(name = "thumb")
 public class ThumbVO {
-    private Long thumbNumber;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long thumbId;
     private String thumbName;
     private String thumbUploadPath;
     private String thumbUuid;
