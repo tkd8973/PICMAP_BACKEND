@@ -51,8 +51,9 @@ jobs:
       run: ls -la ./build/libs/
 
     - name: Build and Push Docker Image
-      run: |
-        docker build -t ${{ secrets.DOCKER_REGISTRY_URL }}/picturemapping/backend .
-        docker push ${{ secrets.DOCKER_REGISTRY_URL }}/picturemapping/backend
-
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        push: true
+        tags: ${{ secrets.DOCKER_REGISTRY_URL }}/backend:${{ github.sha }}
       
