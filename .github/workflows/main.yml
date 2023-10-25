@@ -59,28 +59,28 @@ jobs:
           ${{ secrets.DOCKER_REGISTRY_URL }}/v2/_catalog/backend:${{ github.sha }}
           ${{ secrets.DOCKER_REGISTRY_URL }}/v2/_catalog/backend:latest
 
-  update-manifest:
-    name: Update Kubernetes manifest
-    runs-on: ubuntu-latest
-    needs: ['build']
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Download image digest artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: image-digest
-      - name: Update image in Kubernetes manifest
-        run: |
-          IMAGE_DIGEST=$(cat image-digest.txt)
-          
-          sed -i "s|image: ${{ secrets.DOCKER_REGISTRY_URL }}/backend@sha256:[a-zA-Z0-9]*|image: ${{ secrets.DOCKER_REGISTRY_URL }}backend@$IMAGE_DIGEST|g" deploy/deployment.yml
-      - name: Commit and push changes
-        run: |
-          git config --local user.email "tkd8973@gmail.com"
-          git config --local user.name "tkd8973"
-          git add deploy/deployment.yml
-          git commit -m "Update image in Kubernetes manifest"
-          git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/tkd8973/PICMAP_BACKEND.git HEAD:main
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+update-manifest:
+  name: Update Kubernetes manifest
+  runs-on: ubuntu-latest
+  needs: ['build']
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - name: Download image digest artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: image-digest
+    - name: Update image in Kubernetes manifest
+      run: |
+        IMAGE_DIGEST=$(cat image-digest.txt)
+        
+        sed -i "s|image: ${{ secrets.DOCKER_REGISTRY_URL }}/backend@sha256:[a-zA-Z0-9]*|image: ${{ secrets.DOCKER_REGISTRY_URL }}backend@$IMAGE_DIGEST|g" deploy/deployment.yml
+    - name: Commit and push changes
+      run: |
+        git config --local user.email "tkd8973@gmail.com"
+        git config --local user.name "tkd8973"
+        git add deploy/deployment.yml
+        git commit -m "Update image in Kubernetes manifest"
+        git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/tkd8973/PICMAP_BACKEND.git HEAD:main
+      env:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
