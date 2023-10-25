@@ -57,7 +57,7 @@ jobs:
           ${{ secrets.DOCKER_REGISTRY_URL }}/backend:latest
 
     - name: Save image digest
-      run: echo "${{ steps.docker_build.outputs.digest }}" > image-digest.txt
+      run: echo "${{ github.sha }}" > image-digest.txt
 
     - name: Upload image digest as artifact
       uses: actions/upload-artifact@v2
