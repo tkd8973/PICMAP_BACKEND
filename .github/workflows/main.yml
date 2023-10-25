@@ -79,9 +79,8 @@ jobs:
       - name: Update image in Kubernetes manifest
         run: |
           IMAGE_DIGEST=$(cat image-digest.txt)
-          sed -i "s|image: ${{ secrets.DOCKER_REGISTRY_URL }}/backend:[a-zA-Z0-9]*|image: ${{ secrets.DOCKER_REGISTRY_URL }}/backend:$IMAGE_DIGEST|g" deploy/deployment.yml
-          cat image-digest.txt
-          ls -al
+          sed -i "s|image: ${{ secrets.DOCKER_REGISTRY_URL }}/backend:[a-zA-Z0-9]*|image: ${{ secrets.DOCKER_REGISTRY_URL }}/backend:${{ github.sha }}|g" deploy/deployment.yml
+          cat deploy/deployment.yml
           pwd
           
       - name: Commit and push changes
