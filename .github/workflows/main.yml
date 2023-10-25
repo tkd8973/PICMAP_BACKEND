@@ -59,6 +59,15 @@ jobs:
           ${{ secrets.DOCKER_REGISTRY_URL }}/v2/_catalog/backend:${{ github.sha }}
           ${{ secrets.DOCKER_REGISTRY_URL }}/v2/_catalog/backend:latest
 
+    - name: Save image digest
+      run: echo "${{ steps.docker_build.outputs.digest }}" > image-digest.txt
+
+    - name: Upload image digest as artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: image-digest
+        path: image-digest.txt
+
 update-manifest:
   name: Update Kubernetes manifest
   runs-on: ubuntu-latest
