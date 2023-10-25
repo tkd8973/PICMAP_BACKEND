@@ -47,6 +47,7 @@ jobs:
       run: ls -la ./build/libs/
 
     - name: Build and Push Docker Image
+      id: docker_build
       uses: docker/build-push-action@v2
       with:
         context: .
@@ -78,8 +79,8 @@ jobs:
       - name: Update image in Kubernetes manifest
         run: |
           IMAGE_DIGEST=$(cat image-digest.txt)
-          cat $IMAGE_DIGEST
-          # sed -i "s|image: ${{ secrets.DOCKER_REGISTRY_URL }}/backend@sha256:[a-zA-Z0-9]*|image: ${{ secrets.DOCKER_REGISTRY_URL }}/backend@$IMAGE_DIGEST|g" deploy/deployment.yml
+          # cat $IMAGE_DIGEST
+          sed -i "s|image: ${{ secrets.DOCKER_REGISTRY_URL }}/backend@sha256:[a-zA-Z0-9]*|image: ${{ secrets.DOCKER_REGISTRY_URL }}/backend@$IMAGE_DIGEST|g" deploy/deployment.yml
           # cat deploy/deployment.yml
       - name: Commit and push changes
         run: |
