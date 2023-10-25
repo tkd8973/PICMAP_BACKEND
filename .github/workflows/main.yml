@@ -1,16 +1,12 @@
 name: Docker Image Push Test
 
 on:
-  pull_request:
-    branches:
-      - main
-    types:
-      - closed
+  push:
+    branches: [ "main", "release" ]
       
 jobs:
-  build-and-push:
+  build:
     # PR이 머지된 경우에만 실행
-    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     env:
       DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
@@ -68,7 +64,7 @@ jobs:
         name: image-digest
         path: image-digest.txt
 
-update-manifest:
+  update-manifest:
   name: Update Kubernetes manifest
   runs-on: ubuntu-latest
   needs: ['build']
