@@ -6,7 +6,6 @@ on:
       
 jobs:
   build:
-    # PR이 머지된 경우에만 실행
     runs-on: ubuntu-latest
     env:
       DATABASE_HOST: ${{ secrets.DATABASE_HOST }}
@@ -79,7 +78,7 @@ jobs:
       - name: Update image in Kubernetes manifest
         run: |
           IMAGE_DIGEST=$(cat image-digest.txt)
-          sed -i "s|image: ${{ secrets.DOCKER_REGISTRY_URL }}/backend:.*|image: ${{ secrets.DOCKER_REGISTRY_URL }}/backend:${{ github.sha }}|g" deploy/deployment.yml
+          sudo sed -i "s|image: 192.168.1.102:5000/backend:[a-zA-Z0-9]*|image: 192.168.1.102:5000/backend:$IMAGE_DIGEST|g" deploy/deployment.yml
           cat deploy/deployment.yml
           pwd
           
@@ -87,7 +86,7 @@ jobs:
         run: |
           git config --local user.email "tkd8973@gmail.com"
           git config --local user.name "tkd8973"
-          git add .
+          git add deploy/deployment.yml
           git commit -m "Update image in Kubernetes manifest"
           git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/tkd8973/PICMAP_BACKEND.git HEAD:main
         env:
