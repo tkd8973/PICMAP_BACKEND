@@ -80,6 +80,8 @@ jobs:
           IMAGE_DIGEST=$(cat image-digest.txt)
           
           sed -i "s|image: ${{ secrets.DOCKER_REGISTRY_URL }}/backend@sha256:[a-zA-Z0-9]*|image: ${{ secrets.DOCKER_REGISTRY_URL }}/backend@$IMAGE_DIGEST|g" deploy/deployment.yml
+          cat deploy/deployment.yml
+          echo $IMAGE_DIGEST
       - name: Commit and push changes
         run: |
           git config --local user.email "tkd8973@gmail.com"
