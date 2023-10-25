@@ -63,7 +63,8 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: image-digest
-
+        path: image-digest.txt
+        
   update-manifest:
     name: Update Kubernetes manifest
     runs-on: ubuntu-latest
@@ -79,7 +80,9 @@ jobs:
         run: |
           IMAGE_DIGEST=$(cat image-digest.txt)
           sed -i "s|image: ${{ secrets.DOCKER_REGISTRY_URL }}/backend@sha256:[a-zA-Z0-9]*|image: ${{ secrets.DOCKER_REGISTRY_URL }}/backend@$IMAGE_DIGEST|g" deploy/deployment.yml
-          cat deploy/deployment.yml
+          cat image-digest.txt
+          ls -al
+          pwd
           
       - name: Commit and push changes
         run: |
