@@ -47,7 +47,7 @@ jobs:
       run: ls -la ./build/libs/
 
     - name: Build and Push Docker Image
-
+      id: docker_build
       uses: docker/build-push-action@v2
       with:
         context: .
@@ -80,7 +80,8 @@ jobs:
         run: |
           IMAGE_DIGEST=$(cat image-digest.txt)
           sed -i "s|image: ${{ secrets.DOCKER_REGISTRY_URL }}/backend@sha256:[a-zA-Z0-9]*|image: ${{ secrets.DOCKER_REGISTRY_URL }}/backend@$IMAGE_DIGEST|g" deploy/deployment.yml
-
+          cat deploy/deployment
+          
       - name: Commit and push changes
         run: |
           git config --local user.email "tkd8973@gmail.com"
