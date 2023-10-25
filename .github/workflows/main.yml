@@ -52,8 +52,8 @@ jobs:
         context: .
         push: true
         tags: |
-          ${{ secrets.DOCKER_REGISTRY_URL }}/v2/_catalog/backend:${{ github.sha }}
-          ${{ secrets.DOCKER_REGISTRY_URL }}/v2/_catalog/backend:latest
+          ${{ secrets.DOCKER_REGISTRY_URL }}/backend:${{ github.sha }}
+          ${{ secrets.DOCKER_REGISTRY_URL }}/backend:latest
 
     - name: Save image digest
       run: echo "${{ steps.docker_build.outputs.digest }}" > image-digest.txt
