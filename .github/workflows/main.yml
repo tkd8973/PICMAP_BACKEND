@@ -90,4 +90,4 @@ jobs:
           git config --local user.name "tkd8973"
           git add deploy/deployment.yml
           git commit -m "Update image in Kubernetes manifest"
-          git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/tkd8973//PICMAP_BACKEND.git HEAD:main
+          git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/tkd8973/PICMAP_BACKEND.git HEAD:main
