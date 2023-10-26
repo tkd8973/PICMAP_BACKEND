@@ -16,7 +16,7 @@ spec:
         kubernetes.io/hostname: backend  # 원하는 노드 이름 지정
       containers:
         - name: backend
-          image: 192.168.1.102:5000/backend:49b9c140d4b370ab103e0cd3bb4d3ae2cd544bb6
+          image: 192.168.1.102:5000/backend:d524e766131b1e057ad65e7f249103c3b24451ab
           ports:
             - containerPort: 8080
 ---
